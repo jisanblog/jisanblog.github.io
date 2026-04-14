@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jisan Al Mahmud | Portfolio</title>
+
+<meta name="description" content="Jisan Al Mahmud - Web Developer, Freelancer and Student from Bangladesh.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  background:linear-gradient(135deg,#e6effa,#f2f6fc);
+  font-family:'Inter',sans-serif;
+  padding:16px;
+  display:flex;
+  justify-content:center;
+}
+
+.mobile-container{
+  max-width:500px;
+  width:100%;
+}
+
+/* marquee modern */
+.welcome-marquee{
+  background:linear-gradient(95deg,#1e3c72,#2b4b8f);
+  color:#fff;
+  padding:12px;
+  border-radius:50px;
+  margin-bottom:18px;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.marquee-content{
+  display:inline-block;
+  animation:scroll 12s linear infinite;
+}
+@keyframes scroll{
+  0%{transform:translateX(100%)}
+  100%{transform:translateX(-100%)}
+}
+
+/* card */
+.card{
+  background:#fff;
+  border-radius:25px;
+  padding:20px;
+  margin-bottom:15px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* profile */
+.avatar{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  object-fit:cover;
+  margin:auto;
+  display:block;
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+
+.signature{
+  font-family:'Alex Brush';
+  font-size:2.6rem;
+  text-align:center;
+}
+
+.badge{
+  display:inline-block;
+  margin:8px auto;
+  padding:5px 15px;
+  border-radius:30px;
+  background:#1e3c72;
+  color:#fff;
+  font-size:13px;
+}
+
+.bio{
+  text-align:center;
+  font-size:14px;
+  margin:10px 0;
+}
+
+/* buttons */
+.btn-row{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+}
+.btn{
+  padding:10px 15px;
+  border-radius:30px;
+  text-decoration:none;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+.btn-primary{
+  background:#1e3c72;
+  color:#fff;
+  border:none;
+}
+
+/* services */
+.services{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.service-card{
+  background:#f7faff;
+  padding:12px;
+  border-radius:15px;
+  text-align:center;
+}
+
+/* contact */
+.contact{
+  background:#eef4fc;
+  padding:15px;
+  border-radius:15px;
+}
+
+/* footer */
+.footer{
+  text-align:center;
+  font-size:12px;
+  margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="mobile-container">
+
+<div class="welcome-marquee">
+<div class="marquee-content">
+✨ Welcome to my website 😊 ✨ Welcome to my website 😊
+</div>
+</div>
+
+<div class="card">
+<img src="jisan.jpeg" class="avatar" onerror="this.src='https://placehold.co/110x110?text=Jisan'">
+
+<div class="signature">Jisan</div>
+<div class="badge">Student & Freelancer</div>
+
+<p class="bio">I build websites and grow digital businesses.</p>
+
+<div class="btn-row">
+<a class="btn" href="mailto:jisan0538@gmail.com">Email</a>
+<a class="btn btn-primary" href="javascript:void(0)" onclick="scrollToContact()">Contact</a>
+</div>
+</div>
+
+<div class="card">
+
+<h2>Hi, I'm JISAN AL MAHMUD</h2>
+<p>I am a student and freelancer.</p>
+
+<div class="services">
+<div class="service-card">Web Dev</div>
+<div class="service-card">Freelancing</div>
+<div class="service-card">Business</div>
+<div class="service-card">Support</div>
+</div>
+
+<div id="contact" class="contact">
+<p>Email: jisan0538@gmail.com</p>
+<p>Phone: 01309488169</p>
+</div>
+
+<div class="footer">
+© 2026 Jisan
+</div>
+
+</div>
+
+</div>
+
+<script>
+function scrollToContact(){
+document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>
