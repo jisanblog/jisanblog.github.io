@@ -1,40 +1,226 @@
 <!doctype html>
 <html lang="bn">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>JISAN AL MAHMUD | Portfolio</title>
-  <meta name="description" content="JISAN AL MAHMUD - Web Developer, Freelancer and Student from Bangladesh.">
-  <meta name="theme-color" content="#1e3c72">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JISAN AL MAHMUD | Portfolio</title>
 
-  <!-- Fonts & icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+<meta name="description" content="Jisan Al Mahmud - Web Developer, Freelancer and Freelancer from Bangladesh.">
+<meta name="theme-color" content="#1e3c72">
 
-  <style>
-    :root{
-      --bg-1:#e6effa; --bg-2:#f2f6fc; --primary:#1e3c72; --card:#ffffff; --muted:#334155; --accent:#eef4fc;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
-    body{
-      background:linear-gradient(135deg,var(--bg-1),var(--bg-2));
-      font-family:'Inter',system-ui,Arial,sans-serif;
-      padding:16px;
-      display:flex;
-      justify-content:center;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      color:#0f172a;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    /* Page container with drop/crush animation on load */
-    .container{
-      max-width:540px;
-      width:100%;
-      transform-origin: top center;
-      animation:dropIn 800ms cubic-bezier(.2,.8,.2,1) both;
+<style>
+:root{
+  --primary:#1e3c72;
+  --bg:#f4f7fb;
+  --card:#fff;
+  --text:#0f172a;
+  --muted:#64748b;
+}
+
+/* base */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bg);
+  font-family:'Inter',sans-serif;
+  padding:14px;
+  display:flex;
+  justify-content:center;
+}
+
+/* container */
+.container{
+  max-width:520px;
+  width:100%;
+}
+
+/* cover */
+.cover{
+  height:150px;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  padding:14px;
+  color:#fff;
+}
+.cover::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url("jisan.jpeg") center/cover;
+  filter:brightness(0.6);
+}
+.cover-content{position:relative}
+.cover h1{
+  font-family:'Alex Brush';
+  font-size:2rem;
+}
+.cover p{font-size:14px}
+
+/* card */
+.card{
+  background:var(--card);
+  border-radius:18px;
+  padding:16px;
+  margin-top:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* profile */
+.profile{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.avatar{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #fff;
+}
+.meta h2{
+  font-size:16px;
+  color:var(--primary);
+}
+.meta p{
+  font-size:13px;
+  color:var(--muted);
+}
+.badge{
+  margin-top:6px;
+  display:inline-block;
+  padding:4px 10px;
+  background:var(--primary);
+  color:#fff;
+  border-radius:20px;
+  font-size:12px;
+}
+
+/* bio */
+.bio{
+  margin-top:12px;
+  font-size:14px;
+}
+
+/* buttons */
+.actions{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.btn{
+  padding:10px;
+  border-radius:12px;
+  font-size:14px;
+  text-align:center;
+  text-decoration:none;
+  border:1px solid #e2e8f0;
+  color:var(--primary);
+}
+.btn-primary{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+}
+.btn-whatsapp{
+  background:#25D366;
+  color:#fff;
+  border:none;
+}
+
+/* services */
+.services{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+.service{
+  background:#f1f5f9;
+  padding:12px;
+  border-radius:12px;
+  text-align:center;
+  font-size:13px;
+  font-weight:600;
+}
+
+/* contact */
+.contact{
+  margin-top:12px;
+  background:#eef4fc;
+  padding:12px;
+  border-radius:12px;
+  font-size:13px;
+}
+
+/* footer */
+.footer{
+  text-align:center;
+  margin-top:10px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="cover">
+  <div class="cover-content">
+    <h1>Jisan</h1>
+    <p>Web Developer & Freelancer</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="profile">
+    <img src="jisan.jpeg" class="avatar">
+    <div class="meta">
+      <h2>JISAN AL MAHMUD</h2>
+      <p>Student • Freelancer</p>
+      <div class="badge">Available</div>
+    </div>
+  </div>
+
+  <p class="bio">I build modern websites and help grow digital businesses.</p>
+
+  <div class="actions">
+    <a href="mailto:jisan0538@gmail.com" class="btn">Email</a>
+    <a href="tel:01309488169" class="btn btn-primary">Call</a>
+    <a href="https://wa.me/8801309488169" class="btn btn-whatsapp">WhatsApp</a>
+    <a href="https://www.facebook.com/economist.jisan" class="btn">Facebook</a>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Services</h3>
+  <div class="services">
+    <div class="service">Web Design</div>
+    <div class="service">Frontend</div>
+    <div class="service">Landing Page</div>
+    <div class="service">Support</div>
+  </div>
+
+  <div class="contact">
+    <p>Email: jisan0538@gmail.com</p>
+    <p>Phone: 01309488169</p>
+  </div>
+
+  <div class="footer">© 2026 Jisan</div>
+</div>
+
+</div>
+
+</body>
+</html>      animation:dropIn 800ms cubic-bezier(.2,.8,.2,1) both;
     }
     @keyframes dropIn{
       0% { transform: translateY(-120vh) scaleY(0.6) ; opacity:0; }
