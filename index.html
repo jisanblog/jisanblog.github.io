@@ -1,77 +1,77 @@
-<!doctype html>
-<html lang="bn">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>JISAN AL MAHMUD | creative web developer</title>
-  <meta name="description" content="Jisan Al Mahmud — modern web developer, freelancer, and front-end specialist from Bangladesh. Clean UI, fast delivery.">
-  <meta name="theme-color" content="#0f2b4f">
-  <!-- Google Fonts + Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Alex+Brush&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JISAN AL MAHMUD</title>
 
-    body {
-      background: linear-gradient(145deg, #eef2f9 0%, #e0e8f2 100%);
-      font-family: 'Inter', sans-serif;
-      padding: 20px 16px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f4f7fb;
+  display:flex;
+  justify-content:center;
+}
 
-    /* smooth container */
-    .portfolio {
-      max-width: 560px;
-      width: 100%;
-      margin: 0 auto;
-      transition: all 0.2s ease;
-    }
+.container{
+  max-width:400px;
+  width:100%;
+  padding:15px;
+}
 
-    /* modern card style */
-    .hero-cover {
-      position: relative;
-      border-radius: 32px;
-      overflow: hidden;
-      height: 180px;
-      margin-bottom: 20px;
-      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.12);
-      transition: transform 0.2s ease;
-    }
+.card{
+  background:#fff;
+  border-radius:15px;
+  padding:20px;
+  margin-top:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  text-align:center;
+}
 
-    .hero-cover:hover {
-      transform: scale(1.01);
-    }
+img{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  object-fit:cover;
+}
 
-    .cover-bg {
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(125deg, rgba(15, 43, 79, 0.65), rgba(30, 60, 114, 0.7)), url('jisan.jpeg');
-      background-size: cover;
-      background-position: center 30%;
-      background-repeat: no-repeat;
-      background-color: #1e3c72;   /* fallback if image missing */
-      z-index: 0;
-    }
+h1{font-size:20px;margin:10px 0;}
+p{font-size:14px;color:#555;}
 
-    .cover-content {
-      position: relative;
-      z-index: 2;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 24px 22px;
-      color: white;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    }
+.btn{
+  display:block;
+  margin:8px 0;
+  padding:10px;
+  border-radius:10px;
+  text-decoration:none;
+  background:#1e3c72;
+  color:#fff;
+}
 
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+<img src="jisan.jpeg" onerror="this.src='https://placehold.co/100x100'">
+
+<h1>JISAN AL MAHMUD</h1>
+<p>Student • Freelancer • Web Developer</p>
+
+<a href="mailto:jisan0538@gmail.com" class="btn">Email</a>
+<a href="tel:01309488169" class="btn">Call</a>
+<a href="https://wa.me/8801309488169" class="btn">WhatsApp</a>
+
+</div>
+
+</div>
+
+</body>
+</html>
     .cover-content h1 {
       font-family: 'Alex Brush', cursive;
       font-size: 2.6rem;
