@@ -1,40 +1,213 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jisan Al Mahmud | Portfolio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JISAN AL MAHMUD | Portfolio</title>
+  <meta name="description" content="JISAN AL MAHMUD - Web Developer, Freelancer and Student from Bangladesh.">
+  <meta name="theme-color" content="#1e3c72">
 
-<meta name="description" content="Jisan Al Mahmud - Web Developer, Freelancer and Student from Bangladesh.">
+  <!-- Fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root{
+      --bg-1:#e6effa; --bg-2:#f2f6fc; --primary:#1e3c72; --card:#ffffff; --muted:#334155; --accent:#eef4fc;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      background:linear-gradient(135deg,var(--bg-1),var(--bg-2));
+      font-family:'Inter',system-ui,Arial,sans-serif;
+      padding:16px;
+      display:flex;
+      justify-content:center;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      color:#0f172a;
+    }
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
+    /* Page container with drop/crush animation on load */
+    .container{
+      max-width:540px;
+      width:100%;
+      transform-origin: top center;
+      animation:dropIn 800ms cubic-bezier(.2,.8,.2,1) both;
+    }
+    @keyframes dropIn{
+      0% { transform: translateY(-120vh) scaleY(0.6) ; opacity:0; }
+      60% { transform: translateY(18px) scaleY(1.08); opacity:1; }
+      100% { transform: translateY(0) scaleY(1); opacity:1; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .container{animation:none}
+    }
 
-body{
-  background:linear-gradient(135deg,#e6effa,#f2f6fc);
-  font-family:'Inter',sans-serif;
-  padding:16px;
-  display:flex;
-  justify-content:center;
-}
+    .cover{
+      height:140px;
+      border-radius:18px;
+      overflow:hidden;
+      display:flex;
+      align-items:flex-end;
+      padding:12px;
+      color:#fff;
+      background:linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35));
+      position:relative;
+    }
+    /* try to use profile image as background if available */
+    .cover::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image: url('jisan.jpeg');
+      background-size:cover;
+      background-position:center;
+      filter:brightness(0.7);
+      z-index:0;
+    }
+    .cover-content{position:relative; z-index:1; display:flex; flex-direction:column; gap:6px;}
+    .cover h1{font-family:'Alex Brush',cursive;margin:0;font-size:2rem;line-height:1;color:#fff}
+    .cover p{margin:0;font-weight:600;color:#f0f9ff}
 
-.mobile-container{
-  max-width:500px;
-  width:100%;
-}
+    .card{
+      background:var(--card);
+      border-radius:14px;
+      padding:18px;
+      margin-top:14px;
+      box-shadow:0 10px 25px rgba(2,6,23,0.06);
+    }
 
-/* marquee modern */
-.welcome-marquee{
-  background:linear-gradient(95deg,#1e3c72,#2b4b8f);
-  color:#fff;
-  padding:12px;
-  border-radius:50px;
-  margin-bottom:18px;
-  overflow:hidden;
-  white-space:nowrap;
+    .profile{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .avatar{
+      width:92px;height:92px;border-radius:50%;object-fit:cover;flex:0 0 92px;
+      box-shadow:0 8px 20px rgba(2,6,23,0.08);
+      border:3px solid #fff; /* looks nicer over cover */
+    }
+    .meta h2{margin:0;font-size:1.15rem;color:var(--primary)}
+    .meta p{margin:4px 0 0 0;color:var(--muted);font-size:0.95rem}
+
+    .badge{display:inline-block;margin-top:8px;padding:6px 12px;border-radius:999px;background:var(--primary);color:#fff;font-size:13px}
+
+    .bio{margin-top:12px;color:#0b1220}
+
+    .actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;text-decoration:none;border:1px solid #e6eef8;color:var(--primary);background:transparent;font-weight:600;
+    }
+    .btn-primary{background:var(--primary);color:#fff;border:none}
+    .btn-whatsapp{background:#25D366;color:#fff;border:none}
+
+    .services{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+    .service{background:#f7faff;padding:12px;border-radius:10px;text-align:center;font-weight:700;color:var(--primary)}
+
+    .contact{background:var(--accent);padding:14px;border-radius:10px;margin-top:12px}
+    .contact p{margin:8px 0;color:#0b1220}
+    .contact a{color:var(--primary);text-decoration:none;font-weight:700}
+
+    .footer{text-align:center;font-size:12px;margin-top:12px;color:var(--muted);padding-bottom:8px}
+
+    /* small screens */
+    @media (max-width:420px){
+      .cover{height:120px}
+      .cover h1{font-size:1.6rem}
+      .avatar{width:80px;height:80px}
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="Jisan Al Mahmud portfolio">
+
+    <!-- cover (uses same image as profile if jisan.jpeg present) -->
+    <div class="cover" role="banner" aria-label="Cover">
+      <div class="cover-content">
+        <h1>JISAN AL MAHMUD</h1>
+        <p>Freelancer — Web Development</p>
+      </div>
+    </div>
+
+    <!-- profile card -->
+    <section class="card" aria-labelledby="profile-heading">
+      <div class="profile">
+        <img src="jisan.jpeg" alt="Jisan Al Mahmud portrait" class="avatar"
+             onerror="this.onerror=null;this.src='https://placehold.co/110x110?text=Jisan'">
+        <div class="meta">
+          <h2 id="profile-heading">JISAN AL MAHMUD</h2>
+          <p>Student • Freelancer • Web Development</p>
+          <div class="badge">Student & Freelancer</div>
+        </div>
+      </div>
+
+      <p class="bio">I build websites and help grow digital businesses. Service: Web Development.</p>
+
+      <div class="actions" role="group" aria-label="Contact actions">
+        <!-- Email -->
+        <a class="btn" href="mailto:jisan0538@gmail.com" aria-label="Send email to Jisan">
+          <i class="fa-regular fa-envelope"></i> Email
+        </a>
+
+        <!-- Contact button that initiates a phone call on click -->
+        <a class="btn btn-primary" href="tel:+8801309488169" aria-label="Call Jisan">
+          <i class="fa-solid fa-phone"></i> Call
+        </a>
+
+        <!-- WhatsApp -->
+        <a class="btn btn-whatsapp" href="https://wa.me/8801309488169" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+
+        <!-- Facebook -->
+        <a class="btn" href="https://www.facebook.com/economist.jisan" target="_blank" rel="noopener" aria-label="Visit Facebook profile">
+          <i class="fa-brands fa-facebook"></i> Facebook
+        </a>
+      </div>
+    </section>
+
+    <!-- about / services -->
+    <section class="card" aria-labelledby="about-heading">
+      <h3 id="about-heading" style="margin:0 0 8px 0">About & Services</h3>
+      <p style="color:var(--muted);margin:0 0 10px 0">Service: Web Development — I create responsive, fast and accessible websites.</p>
+
+      <div class="services" aria-hidden="false">
+        <div class="service">Web Design</div>
+        <div class="service">Frontend Development</div>
+        <div class="service">Landing Pages</div>
+        <div class="service">Maintenance & Support</div>
+      </div>
+
+      <div id="contact" class="contact" aria-labelledby="contact-heading">
+        <h4 id="contact-heading" style="margin:0 0 8px 0">Contact</h4>
+        <p>Email: <a href="mailto:jisan0538@gmail.com">jisan0538@gmail.com</a></p>
+        <p>Phone: <a href="tel:+8801309488169">+880 1309 488169</a></p>
+        <p>WhatsApp: <a href="https://wa.me/8801309488169" target="_blank" rel="noopener">Chat on WhatsApp</a></p>
+        <p>Facebook: <a href="https://www.facebook.com/economist.jisan" target="_blank" rel="noopener">economist.jisan</a></p>
+      </div>
+
+      <div class="footer">© 2026 JISAN AL MAHMUD</div>
+    </section>
+
+  </main>
+</body>
+</html>      </div>
+
+      <div id="contact" class="contact" aria-labelledby="contact-heading">
+        <h4 id="contact-heading" style="margin:0 0 8px 0">Contact</h4>
+        <p>Email: <a href="mailto:jisan0538@gmail.com">jisan0538@gmail.com</a></p>
+        <p>Phone: <a href="tel:+8801309488169">+880 1309 488169</a></p>
+        <p>WhatsApp: <a href="https://wa.me/8801309488169" target="_blank" rel="noopener">Chat on WhatsApp</a></p>
+        <p>Facebook: <a href="https://www.facebook.com/economist.jisan" target="_blank" rel="noopener">economist.jisan</a></p>
+      </div>
+
+      <div class="footer">© 2026 JISAN AL MAHMUD</div>
+    </section>
+
+  </main>
+</body>
+</html>  white-space:nowrap;
 }
 .marquee-content{
   display:inline-block;
