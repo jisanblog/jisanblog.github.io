@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JISAN · অ্যাডমিন প্যানেল (ক্লায়েন্ট-সাইড)</title>
+  <title>JISAN · লকড অ্যাডমিন</title>
   <!-- Google Fonts + Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Alex+Brush&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,7 +16,70 @@
       min-height: 100vh;
       display: flex;
       justify-content: center;
+      align-items: center;
     }
+    /* লগইন ওভারলে (শুরুতেই দেখাবে) */
+    .login-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 30, 50, 0.7);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .login-box {
+      background: white;
+      padding: 40px 32px;
+      border-radius: 36px;
+      box-shadow: 0 30px 45px -15px #0f1e2e;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+    .login-box h2 {
+      font-size: 1.8rem;
+      color: #0f2b4f;
+      margin-bottom: 10px;
+    }
+    .login-box p { color: #445e7e; margin-bottom: 24px; }
+    .login-box input {
+      width: 100%;
+      padding: 16px 18px;
+      border: 1.5px solid #ccdaea;
+      border-radius: 48px;
+      font-size: 1rem;
+      margin-bottom: 18px;
+      outline: none;
+    }
+    .login-box input:focus { border-color: #1e3c72; }
+    .login-btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 48px;
+      background: #1e3c72;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .login-btn:hover { background: #0f2b4f; }
+    .error-msg {
+      color: #c23b3b;
+      margin-top: 12px;
+      font-size: 0.9rem;
+      min-height: 24px;
+    }
+    .hint {
+      margin-top: 20px;
+      font-size: 0.75rem;
+      color: #7a8ba1;
+    }
+
+    /* অ্যাডমিন লেআউট (লগইন পরেই দৃশ্যমান) */
     .admin-layout {
       max-width: 1400px;
       width: 100%;
@@ -24,7 +87,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 24px;
     }
-    /* প্যানেল স্টাইল */
     .edit-panel, .preview-panel {
       background: #ffffff;
       border-radius: 28px;
@@ -43,11 +105,7 @@
       border-bottom: 2px solid #e2e8f0;
       padding-bottom: 16px;
     }
-    .form-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
+    .form-grid { display: flex; flex-direction: column; gap: 18px; }
     .field-group label {
       display: block;
       font-weight: 600;
@@ -73,16 +131,8 @@
       background: white;
       box-shadow: 0 0 0 3px #1e3c7215;
     }
-    .row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .action-bar {
-      display: flex;
-      gap: 12px;
-      margin-top: 20px;
-    }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .action-bar { display: flex; gap: 12px; margin-top: 20px; }
     .btn {
       flex: 1;
       padding: 14px 10px;
@@ -96,24 +146,12 @@
       color: #1e293b;
       border: 1px solid #cbd5e1;
     }
-    .btn-primary {
-      background: #1e3c72;
-      color: white;
-      border: none;
-    }
+    .btn-primary { background: #1e3c72; color: white; border: none; }
     .btn-primary:hover { background: #102a4c; }
-    .btn-success {
-      background: #0f2b4f;
-      color: white;
-    }
-    .copy-feedback {
-      margin-top: 12px;
-      font-size: 0.8rem;
-      color: #2b6e3b;
-      text-align: center;
-    }
+    .btn-success { background: #0f2b4f; color: white; }
+    .copy-feedback { margin-top: 12px; font-size: 0.8rem; color: #2b6e3b; text-align: center; }
 
-    /* প্রিভিউ কার্ড — আপনার সাইটের হুবহু ক্লোন */
+    /* প্রিভিউ কার্ড */
     .preview-card {
       background: #fbfdff;
       border-radius: 24px;
@@ -122,148 +160,123 @@
       max-width: 560px;
       margin: 0 auto;
     }
-    .preview-avatar {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
+    .preview-avatar { text-align: center; margin-bottom: 1rem; }
     .preview-avatar img {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid white;
-      box-shadow: 0 12px 22px -8px rgba(0,0,0,0.15);
+      width: 110px; height: 110px; border-radius: 50%; object-fit: cover;
+      border: 3px solid white; box-shadow: 0 12px 22px -8px rgba(0,0,0,0.15);
       background: #eef2fa;
     }
     .preview-signature {
       font-family: 'Alex Brush', cursive;
-      font-size: 2.5rem;
-      text-align: center;
-      color: #0b2b4f;
+      font-size: 2.5rem; text-align: center; color: #0b2b4f;
     }
-    .preview-badge-wrap {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin: 10px 0;
-    }
+    .preview-badge-wrap { display: flex; justify-content: center; gap: 8px; margin: 10px 0; }
     .preview-badge {
-      background: #1e3c72;
-      color: white;
-      padding: 4px 12px;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      font-weight: 600;
+      background: #1e3c72; color: white; padding: 4px 12px;
+      border-radius: 40px; font-size: 0.75rem; font-weight: 600;
     }
     .preview-tagline {
-      text-align: center;
-      font-size: 0.85rem;
-      background: #eef3fc;
-      padding: 8px 16px;
-      border-radius: 50px;
-      margin: 12px 0;
+      text-align: center; font-size: 0.85rem; background: #eef3fc;
+      padding: 8px 16px; border-radius: 50px; margin: 12px 0;
     }
     .marquee-preview {
-      background: #eef3fc;
-      border-radius: 60px;
-      padding: 10px;
-      margin: 16px 0;
-      overflow: hidden;
-      white-space: nowrap;
+      background: #eef3fc; border-radius: 60px; padding: 10px;
+      margin: 16px 0; overflow: hidden; white-space: nowrap;
       border: 1px solid #e2edff;
     }
     .preview-services {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin: 20px 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;
     }
     .preview-contact-row {
-      background: #eef4fc;
-      border-radius: 24px;
-      padding: 12px 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: space-between;
+      background: #eef4fc; border-radius: 24px; padding: 12px 16px;
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between;
     }
     @media (max-width: 800px) {
       .admin-layout { grid-template-columns: 1fr; }
     }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
-<div class="admin-layout">
-  <!-- বাম পাশে এডিট ফর্ম -->
-  <div class="edit-panel">
-    <h2><i class="fas fa-pen-to-square" style="color:#1e3c72;"></i> কনটেন্ট এডিটর</h2>
-    <div class="form-grid">
-      <div class="field-group">
-        <label>পুরো নাম (সিগনেচার)</label>
-        <input type="text" id="fullName" placeholder="Jisan Al Mahmud" value="Jisan Al Mahmud">
-      </div>
-      <div class="row-2">
-        <div class="field-group">
-          <label>ট্যাগলাইন</label>
-          <input type="text" id="tagline" value="Web Developer | Frontend Specialist">
-        </div>
-        <div class="field-group">
-          <label>অবস্থা (Available)</label>
-          <input type="text" id="availability" value="Available">
-        </div>
-      </div>
-      <div class="field-group">
-        <label>মার্কি টেক্সট (স্বাগত বার্তা)</label>
-        <input type="text" id="marqueeText" value="Assalamualaikum welcome to JISAN website ✦ Web solutions ✦">
-      </div>
-      <div class="row-2">
-        <div class="field-group">
-          <label>ইমেইল</label>
-          <input type="email" id="email" value="jisan0538@gmail.com">
-        </div>
-        <div class="field-group">
-          <label>ফোন (01309488169)</label>
-          <input type="text" id="phone" value="01309488169">
-        </div>
-      </div>
-      <div class="row-2">
-        <div class="field-group">
-          <label>হোয়াটসঅ্যাপ (+880...)</label>
-          <input type="text" id="whatsapp" value="+880 1309 488169">
-        </div>
-        <div class="field-group">
-          <label>ফেসবুক ইউজারনেম</label>
-          <input type="text" id="facebookUser" value="economist.jisan">
-        </div>
-      </div>
-      <div class="field-group">
-        <label>সেবাসমূহ (কমা দিয়ে আলাদা, সর্বোচ্চ ৪টি)</label>
-        <input type="text" id="servicesInput" value="Web Design, Frontend Dev, Landing Pages, Support & Fixes">
-      </div>
-      <div class="action-bar">
-        <button class="btn" id="resetToDefault"><i class="fas fa-undo-alt"></i> রিসেট</button>
-        <button class="btn-primary" id="applyChanges"><i class="fas fa-sync-alt"></i> প্রিভিউ আপডেট</button>
-      </div>
-      <button class="btn btn-success" id="copyFullHTML"><i class="fas fa-copy"></i> 📋 আপডেটেড HTML কোড কপি করুন</button>
-      <div id="copyMessage" class="copy-feedback"></div>
-    </div>
-    <p style="margin-top:20px; font-size:0.8rem; color:#5e7188; background:#f0f6ff; padding:10px; border-radius:18px;">
-      <i class="fas fa-info-circle"></i> কপি করা কোড সরাসরি আপনার <code>index.html</code> এ পেস্ট করুন। ছবির ফাইল <code>jisan.jpeg</code> একই ফোল্ডারে রাখুন।
-    </p>
-  </div>
 
-  <!-- ডান পাশে লাইভ প্রিভিউ -->
-  <div class="preview-panel">
-    <h2><i class="fas fa-eye"></i> লাইভ প্রিভিউ</h2>
-    <div id="livePreview" class="preview-card">
-      <!-- JavaScript দিয়ে রেন্ডার হবে -->
+<!-- লগইন স্ক্রিন (পাসওয়ার্ড প্রোটেকশন) -->
+<div id="loginOverlay" class="login-overlay">
+  <div class="login-box">
+    <h2><i class="fas fa-lock" style="color:#1e3c72;"></i> অ্যাডমিন লগইন</h2>
+    <p>পাসওয়ার্ড দিয়ে প্রবেশ করুন</p>
+    <input type="password" id="passwordInput" placeholder="••••••••" autofocus>
+    <button class="login-btn" id="loginBtn"><i class="fas fa-arrow-right"></i> লগইন</button>
+    <div id="loginError" class="error-msg"></div>
+    <div class="hint">
+      <i class="far fa-question-circle"></i> ডেমো পাসওয়ার্ড: jisan2026<br>
+      (নিরাপত্তার জন্য ব্রাউজার সোর্সে দেখা যাবে)
     </div>
   </div>
 </div>
 
+<!-- মূল অ্যাডমিন প্যানেল (প্রথমে লুকানো) -->
+<div id="adminMain" class="admin-layout hidden">
+  <!-- বাম এডিট প্যানেল -->
+  <div class="edit-panel">
+    <h2><i class="fas fa-pen-to-square" style="color:#1e3c72;"></i> কনটেন্ট এডিটর</h2>
+    <div class="form-grid">
+      <div class="field-group"><label>পুরো নাম</label><input type="text" id="fullName" value="Jisan Al Mahmud"></div>
+      <div class="row-2">
+        <div class="field-group"><label>ট্যাগলাইন</label><input type="text" id="tagline" value="Web Developer | Frontend Specialist"></div>
+        <div class="field-group"><label>অবস্থা</label><input type="text" id="availability" value="Available"></div>
+      </div>
+      <div class="field-group"><label>মার্কি টেক্সট</label><input type="text" id="marqueeText" value="Assalamualaikum welcome to JISAN website ✦ Web solutions ✦"></div>
+      <div class="row-2">
+        <div class="field-group"><label>ইমেইল</label><input type="email" id="email" value="jisan0538@gmail.com"></div>
+        <div class="field-group"><label>ফোন</label><input type="text" id="phone" value="01309488169"></div>
+      </div>
+      <div class="row-2">
+        <div class="field-group"><label>হোয়াটসঅ্যাপ</label><input type="text" id="whatsapp" value="+880 1309 488169"></div>
+        <div class="field-group"><label>ফেসবুক ইউজার</label><input type="text" id="facebookUser" value="economist.jisan"></div>
+      </div>
+      <div class="field-group"><label>সেবাসমূহ (কমা দিয়ে)</label><input type="text" id="servicesInput" value="Web Design, Frontend Dev, Landing Pages, Support & Fixes"></div>
+      <div class="action-bar">
+        <button class="btn" id="resetToDefault"><i class="fas fa-undo-alt"></i> রিসেট</button>
+        <button class="btn-primary" id="applyChanges"><i class="fas fa-sync-alt"></i> প্রিভিউ আপডেট</button>
+      </div>
+      <button class="btn btn-success" id="copyFullHTML"><i class="fas fa-copy"></i> 📋 সম্পূর্ণ HTML কপি করুন</button>
+      <div id="copyMessage" class="copy-feedback"></div>
+    </div>
+  </div>
+  <!-- ডান প্রিভিউ -->
+  <div class="preview-panel">
+    <h2><i class="fas fa-eye"></i> লাইভ প্রিভিউ</h2>
+    <div id="livePreview" class="preview-card"></div>
+  </div>
+</div>
+
 <script>
-  (function() {
-    // DOM elements
+  (function(){
+    // ---------- পাসওয়ার্ড সেটিং ----------
+    const CORRECT_PASSWORD = "jisan2026";   // এখানে ইচ্ছামতো বদলাতে পারেন
+    const loginOverlay = document.getElementById('loginOverlay');
+    const adminMain = document.getElementById('adminMain');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginBtn = document.getElementById('loginBtn');
+    const loginError = document.getElementById('loginError');
+
+    // লগইন চেক
+    function checkPassword() {
+      if (passwordInput.value === CORRECT_PASSWORD) {
+        loginOverlay.classList.add('hidden');
+        adminMain.classList.remove('hidden');
+        renderPreview(); // লগইনের পর প্রিভিউ রেন্ডার
+      } else {
+        loginError.innerText = '❌ ভুল পাসওয়ার্ড, আবার চেষ্টা করুন';
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+    }
+
+    loginBtn.addEventListener('click', checkPassword);
+    passwordInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') checkPassword(); });
+
+    // ---------- অ্যাডমিন ফাংশনালিটি ----------
     const fullNameInp = document.getElementById('fullName');
     const taglineInp = document.getElementById('tagline');
     const availabilityInp = document.getElementById('availability');
@@ -273,11 +286,9 @@
     const whatsappInp = document.getElementById('whatsapp');
     const fbUserInp = document.getElementById('facebookUser');
     const servicesInp = document.getElementById('servicesInput');
-
     const previewDiv = document.getElementById('livePreview');
     const copyMsg = document.getElementById('copyMessage');
 
-    // ডিফল্ট মান (রিসেটের জন্য)
     const defaults = {
       fullName: 'Jisan Al Mahmud',
       tagline: 'Web Developer | Frontend Specialist',
@@ -290,7 +301,6 @@
       services: 'Web Design, Frontend Dev, Landing Pages, Support & Fixes'
     };
 
-    // ইনপুট ফিল্ডে ডিফল্ট সেট
     function setInputDefaults() {
       fullNameInp.value = defaults.fullName;
       taglineInp.value = defaults.tagline;
@@ -303,64 +313,50 @@
       servicesInp.value = defaults.services;
     }
 
-    // প্রিভিউ রেন্ডার
     function renderPreview() {
-      const name = fullNameInp.value.trim() || 'Jisan Al Mahmud';
-      const tag = taglineInp.value.trim() || 'Web Developer';
-      const avail = availabilityInp.value.trim() || 'Available';
-      const marq = marqueeInp.value.trim() || 'Assalamualaikum welcome';
-      const emailVal = emailInp.value.trim() || 'jisan0538@gmail.com';
-      const phoneVal = phoneInp.value.trim() || '01309488169';
-      const waVal = whatsappInp.value.trim() || '+8801309488169';
-      const fbUser = fbUserInp.value.trim() || 'economist.jisan';
+      const name = fullNameInp.value.trim() || defaults.fullName;
+      const tag = taglineInp.value.trim() || defaults.tagline;
+      const avail = availabilityInp.value.trim() || defaults.availability;
+      const marq = marqueeInp.value.trim() || defaults.marquee;
+      const emailVal = emailInp.value.trim() || defaults.email;
+      const phoneVal = phoneInp.value.trim() || defaults.phone;
+      const waVal = whatsappInp.value.trim() || defaults.whatsapp;
+      const fbUser = fbUserInp.value.trim() || defaults.fbUser;
+      let services = servicesInp.value.split(',').map(s => s.trim()).filter(s => s);
+      if (!services.length) services = ['Web Design', 'Frontend Dev', 'Landing Pages', 'Support'];
       
-      // সার্ভিস পার্স (কমা দিয়ে)
-      let services = servicesInp.value.split(',').map(s => s.trim()).filter(s => s.length > 0);
-      if (services.length === 0) services = ['Web Design', 'Frontend Dev', 'Landing Pages', 'Support'];
-      const serviceItems = services.slice(0, 4).map(s => 
-        `<div class="service-chip" style="background:#f1f6fe;border-radius:2rem;padding:0.65rem 0.3rem;text-align:center;font-size:0.8rem;font-weight:600;"><i class="fas fa-code"></i> ${s}</div>`
+      const serviceItems = services.slice(0,4).map(s => 
+        `<div style="background:#f1f6fe;border-radius:2rem;padding:0.65rem;text-align:center;font-size:0.8rem;font-weight:600;"><i class="fas fa-code"></i> ${s}</div>`
       ).join('');
-
-      // WhatsApp লিংক (শুধু নাম্বার)
+      
       const waNumber = waVal.replace(/\D/g, '');
-      const waLink = `https://wa.me/${waNumber}`;
-      const fbLink = `https://www.facebook.com/${fbUser}`;
-
-      const html = `
-        <div class="preview-avatar">
-          <img src="jisan.jpeg" alt="profile" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'48\' fill=\'%231e3c72\'/%3E%3Ctext x=\'50\' y=\'68\' font-size=\'46\' text-anchor=\'middle\' fill=\'%23ffffff\' font-family=\'Arial\' font-weight=\'bold\'%3EJ%3C/text%3E%3C/svg%3E';">
-        </div>
+      previewDiv.innerHTML = `
+        <div class="preview-avatar"><img src="jisan.jpeg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'48\' fill=\'%231e3c72\'/%3E%3Ctext x=\'50\' y=\'68\' font-size=\'46\' text-anchor=\'middle\' fill=\'%23fff\'%3EJ%3C/text%3E%3C/svg%3E';"></div>
         <div class="preview-signature">${name}</div>
         <div class="preview-badge-wrap">
           <span class="preview-badge"><i class="fas fa-graduation-cap"></i> Student</span>
           <span class="preview-badge"><i class="fas fa-laptop-code"></i> Freelancer</span>
           <span class="preview-badge"><i class="fas fa-check-circle"></i> ${avail}</span>
         </div>
-        <div class="preview-tagline"><i class="fas fa-globe"></i> ${tag}</div>
-        <div class="marquee-preview">
-          <div style="display:inline-block; white-space:nowrap; animation:scrollText 14s linear infinite; font-weight:600; color:#1e3c72;">
-            <i class="fas fa-hand-peace"></i> ${marq}  ✦  <i class="fas fa-laptop-code"></i> modern solutions
-          </div>
+        <div class="preview-tagline">${tag}</div>
+        <div class="marquee-preview"><div style="display:inline-block;white-space:nowrap;animation:scrollText 14s linear infinite;font-weight:600;color:#1e3c72;"><i class="fas fa-hand-peace"></i> ${marq}</div></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:20px 0">
+          <a href="mailto:${emailVal}" style="background:white;border:1px solid #ccc;padding:8px;border-radius:40px;text-align:center;color:#1e3c72;text-decoration:none;"><i class="fas fa-envelope"></i></a>
+          <a href="tel:${phoneVal}" style="background:#1e3c72;color:white;padding:8px;border-radius:40px;text-align:center;text-decoration:none;"><i class="fas fa-phone"></i></a>
+          <a href="https://wa.me/${waNumber}" style="background:#25D366;color:white;padding:8px;border-radius:40px;text-align:center;text-decoration:none;"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://facebook.com/${fbUser}" style="background:white;border:1px solid #ccc;padding:8px;border-radius:40px;text-align:center;color:#1e3c72;text-decoration:none;"><i class="fab fa-facebook-f"></i></a>
         </div>
-        <div class="action-row" style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:20px 0;">
-          <a href="mailto:${emailVal}" class="action-btn" style="background:white; border:1px solid #ccc; padding:8px; border-radius:40px; text-decoration:none; color:#1e3c72; font-size:0.75rem; text-align:center;"><i class="fas fa-envelope"></i> Email</a>
-          <a href="tel:${phoneVal}" class="action-btn" style="background:#1e3c72; color:white; padding:8px; border-radius:40px; text-decoration:none; font-size:0.75rem;"><i class="fas fa-phone"></i> Call</a>
-          <a href="${waLink}" target="_blank" class="action-btn" style="background:#25D366; color:white; padding:8px; border-radius:40px; text-decoration:none; font-size:0.75rem;"><i class="fab fa-whatsapp"></i> WA</a>
-          <a href="${fbLink}" target="_blank" class="action-btn" style="background:white; border:1px solid #ccc; padding:8px; border-radius:40px; text-decoration:none; color:#1e3c72; font-size:0.75rem;"><i class="fab fa-facebook-f"></i> FB</a>
-        </div>
-        <div style="font-weight:700; margin:10px 0 5px;"><i class="fas fa-crown"></i> what I deliver</div>
+        <div style="font-weight:700;margin:10px 0">what I deliver</div>
         <div class="preview-services">${serviceItems}</div>
         <div class="preview-contact-row">
           <span><i class="fas fa-envelope"></i> ${emailVal}</span>
           <span><i class="fas fa-phone"></i> ${phoneVal}</span>
           <span><i class="fab fa-whatsapp"></i> ${waVal}</span>
         </div>
-        <div style="margin-top:16px; font-size:0.7rem; text-align:center; color:#5f6e82;">© 2026 ${name.split(' ')[0] || 'JISAN'} · freelance ready</div>
+        <div style="margin-top:20px;font-size:0.7rem;text-align:center;">© 2026 ${name.split(' ')[0]} · freelance</div>
       `;
-      previewDiv.innerHTML = html;
     }
 
-    // সম্পূর্ণ সাইটের HTML জেনারেট (আসল ফরম্যাটে)
     function generateFullSiteHTML() {
       const name = fullNameInp.value.trim() || defaults.fullName;
       const tag = taglineInp.value.trim() || defaults.tagline;
@@ -371,84 +367,25 @@
       const waVal = whatsappInp.value.trim() || defaults.whatsapp;
       const fbUser = fbUserInp.value.trim() || defaults.fbUser;
       let services = servicesInp.value.split(',').map(s => s.trim()).filter(s => s);
-      if (!services.length) services = ['Web Design', 'Frontend Dev', 'Landing Pages', 'Support & Fixes'];
-      const serviceHTML = services.slice(0,4).map(s => 
-        `<div class="service-chip"><i class="fas fa-code"></i> ${s}</div>`
-      ).join('\n              ');
+      if (!services.length) services = ['Web Design','Frontend Dev','Landing Pages','Support'];
+      const serviceHTML = services.slice(0,4).map(s => `<div class="service-chip"><i class="fas fa-code"></i> ${s}</div>`).join('');
       const waNumber = waVal.replace(/\D/g, '');
-      
-      // সম্পূর্ণ সাইট টেমপ্লেট (সংক্ষিপ্ত কিন্তু কার্যকরী)
-      return `<!DOCTYPE html>
-<html lang="bn">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${name} | web developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Alex+Brush&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box} body{background:#eef2f9;font-family:'Inter',sans-serif;padding:1.5rem;display:flex;justify-content:center;min-height:100vh;align-items:center}.github-card{max-width:560px;width:100%}.profile-card{background:#fff;border-radius:2rem;padding:1.8rem 1.6rem;box-shadow:0 20px 35px -12px rgba(0,0,0,0.1)}.avatar{width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid white;box-shadow:0 12px 22px -8px rgba(0,0,0,0.15)}.signature-name{font-family:'Alex Brush',cursive;font-size:2.5rem;text-align:center;color:#0b2b4f}.badge{background:#1e3c72;color:white;padding:0.3rem 1rem;border-radius:40px;font-size:0.75rem;font-weight:600}.marquee-container{background:#eef3fc;border-radius:60px;padding:0.7rem;margin:1rem 0;overflow:hidden;white-space:nowrap}.action-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:40px;font-size:0.8rem;font-weight:600;text-decoration:none;background:white;border:1px solid #e2e8f0;color:#1e3c72}.btn-wa{background:#25D366;color:white}.service-chip{background:#f1f6fe;border-radius:2rem;padding:0.65rem;text-align:center;font-size:0.8rem;font-weight:600}.contact-row{background:#eef4fc;border-radius:1.5rem;padding:0.9rem;display:flex;flex-wrap:wrap;gap:8px}@media (max-width:480px){.profile-card{padding:1.4rem}}
-  </style>
-</head>
-<body>
-<div class="github-card"><div class="profile-card">
-  <div style="text-align:center"><img src="jisan.jpeg" class="avatar" alt="${name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 100\\'%3E%3Ccircle cx=\\'50\\' cy=\\'50\\' r=\\'48\\' fill=\\'%231e3c72\\'/%3E%3Ctext x=\\'50\\' y=\\'68\\' font-size=\\'46\\' text-anchor=\\'middle\\' fill=\\'%23fff\\'%3EJ%3C/text%3E%3C/svg%3E';"></div>
-  <div class="signature-name">${name}</div>
-  <div style="display:flex;justify-content:center;gap:8px;margin:10px 0">
-    <span class="badge"><i class="fas fa-graduation-cap"></i> Student</span>
-    <span class="badge"><i class="fas fa-laptop-code"></i> Freelancer</span>
-    <span class="badge"><i class="fas fa-check-circle"></i> ${avail}</span>
-  </div>
-  <div style="text-align:center;background:#f8fafd;padding:8px;border-radius:50px;margin-bottom:1rem">${tag}</div>
-  <div class="marquee-container"><div style="display:inline-block;animation:scrollText 14s linear infinite;font-weight:600;color:#1e3c72"><i class="fas fa-hand-peace"></i> ${marq} ✦ <i class="fas fa-laptop-code"></i> solutions</div></div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:20px 0">
-    <a href="mailto:${emailVal}" class="action-btn"><i class="fas fa-envelope"></i> Email</a>
-    <a href="tel:${phoneVal}" class="action-btn" style="background:#1e3c72;color:white"><i class="fas fa-phone"></i> Call</a>
-    <a href="https://wa.me/${waNumber}" class="action-btn btn-wa"><i class="fab fa-whatsapp"></i> WA</a>
-    <a href="https://facebook.com/${fbUser}" class="action-btn"><i class="fab fa-facebook-f"></i> FB</a>
-  </div>
-  <div style="font-weight:700;margin:10px 0"><i class="fas fa-crown"></i> what I deliver</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.5rem">
-    ${serviceHTML}
-  </div>
-  <div class="contact-row">
-    <span><i class="fas fa-envelope"></i> ${emailVal}</span>
-    <span><i class="fas fa-phone"></i> ${phoneVal}</span>
-    <span><i class="fab fa-whatsapp"></i> ${waVal}</span>
-  </div>
-  <div style="text-align:center;margin-top:1.5rem;font-size:0.7rem">© 2026 ${name.split(' ')[0]} · freelance ready</div>
-</div></div>
-<style>@keyframes scrollText{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}</style>
-</body>
-</html>`;
+      return `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${name}</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Alex+Brush&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#eef2f9;font-family:Inter,sans-serif;padding:1.5rem;display:flex;justify-content:center;min-height:100vh;align-items:center}.card{max-width:560px;background:white;border-radius:2rem;padding:1.8rem;box-shadow:0 20px 35px -12px rgba(0,0,0,0.1)}.avatar{width:110px;height:110px;border-radius:50%}.signature{font-family:'Alex Brush',cursive;font-size:2.5rem;text-align:center}.badge{background:#1e3c72;color:white;padding:4px 12px;border-radius:40px;font-size:.75rem}.marquee{background:#eef3fc;border-radius:60px;padding:10px;overflow:hidden;white-space:nowrap}@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}</style></head><body><div class="card"><div style="text-align:center"><img src="jisan.jpeg" class="avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 100\\'%3E%3Ccircle cx=\\'50\\' cy=\\'50\\' r=\\'48\\' fill=\\'%231e3c72\\'/%3E%3Ctext x=\\'50\\' y=\\'68\\' font-size=\\'46\\' fill=\\'%23fff\\'%3EJ%3C/text%3E%3C/svg%3E'"></div><div class="signature">${name}</div><div style="display:flex;justify-content:center;gap:8px;margin:10px"><span class="badge">Student</span><span class="badge">Freelancer</span><span class="badge">${avail}</span></div><div style="text-align:center;margin:10px">${tag}</div><div class="marquee"><div style="display:inline-block;animation:scroll 14s linear infinite;font-weight:600">${marq}</div></div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:20px 0"><a href="mailto:${emailVal}" style="padding:8px;border-radius:40px;background:#fff;border:1px solid #ccc;text-align:center"><i class="fas fa-envelope"></i></a><a href="tel:${phoneVal}" style="padding:8px;border-radius:40px;background:#1e3c72;color:#fff;text-align:center"><i class="fas fa-phone"></i></a><a href="https://wa.me/${waNumber}" style="padding:8px;border-radius:40px;background:#25D366;color:#fff;text-align:center"><i class="fab fa-whatsapp"></i></a><a href="https://facebook.com/${fbUser}" style="padding:8px;border-radius:40px;background:#fff;border:1px solid #ccc;text-align:center"><i class="fab fa-facebook-f"></i></a></div><div style="font-weight:700">what I deliver</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0">${serviceHTML}</div><div style="background:#eef4fc;border-radius:24px;padding:12px;display:flex;flex-wrap:wrap;gap:8px"><span>📧 ${emailVal}</span><span>📞 ${phoneVal}</span><span>💬 ${waVal}</span></div><div style="text-align:center;margin-top:20px;font-size:.7rem">© 2026 ${name.split(' ')[0]}</div></div></body></html>`;
     }
 
-    // কপি ফাংশন
     async function copyFullCode() {
-      const code = generateFullSiteHTML();
       try {
-        await navigator.clipboard.writeText(code);
-        copyMsg.innerText = '✅ সম্পূর্ণ HTML কোড কপি হয়েছে! এখন index.html এ পেস্ট করুন।';
-      } catch (err) {
-        copyMsg.innerText = '❌ কপি করা যায়নি, ম্যানুয়ালি কপি করুন।';
-      }
-      setTimeout(() => copyMsg.innerText = '', 4000);
+        await navigator.clipboard.writeText(generateFullSiteHTML());
+        copyMsg.innerText = '✅ HTML কপি হয়েছে! index.html আপডেট করুন।';
+      } catch { copyMsg.innerText = '❌ কপি ব্যর্থ'; }
+      setTimeout(() => copyMsg.innerText = '', 3000);
     }
 
-    // ইভেন্ট লিসেনার
     document.getElementById('applyChanges').addEventListener('click', renderPreview);
-    document.getElementById('resetToDefault').addEventListener('click', () => {
-      setInputDefaults();
-      renderPreview();
-    });
+    document.getElementById('resetToDefault').addEventListener('click', () => { setInputDefaults(); renderPreview(); });
     document.getElementById('copyFullHTML').addEventListener('click', copyFullCode);
-
-    // ইনপুট ফিল্ডে রিয়েল টাইম প্রিভিউ চাইলে আনকমেন্ট করুন:
-    // [fullNameInp, taglineInp, availabilityInp, marqueeInp, emailInp, phoneInp, whatsappInp, fbUserInp, servicesInp].forEach(el => el.addEventListener('input', renderPreview));
-
-    // ইনিশিয়াল রেন্ডার
     setInputDefaults();
-    renderPreview();
+    // (প্রিভিউ আগে থেকে রেন্ডার করব না, লগইনের পর হবে)
   })();
 </script>
 </body>
